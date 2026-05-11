@@ -1,0 +1,21 @@
+{
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "description": "tic tac toe",
+  "keywords": [
+    "online",
+    "tic-tac-toe"
+  ],
+  "license": "ISC",
+  "author": "Salim",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^5.2.1",
+    "jsdom": "^29.1.1"
+  }
+}
