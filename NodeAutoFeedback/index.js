@@ -617,7 +617,6 @@ async function launchTask1() {
         let cookies = await page.cookies();
 
         if (cookies.length > 0) {
-            console.log(JSON.stringify(cookies, 4, null));
             addError(errors, 9, "Cookies exist", "Det finns fortfarande kakor kvar när man går in på /reset");
         }
         playerIndex++;
