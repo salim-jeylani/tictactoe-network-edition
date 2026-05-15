@@ -10,7 +10,6 @@ let globalObject = {};
    - myColor (sträng med klientens valda färg )
 */
 socket.on('newGame', function (data) {
-    
     //Hämta DOM-referenser
     let players = document.querySelector('#players');
     let status = document.querySelector('#status');

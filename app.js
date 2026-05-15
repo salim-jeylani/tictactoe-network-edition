@@ -2,13 +2,20 @@
 //Filen app.js är den enda ni skall och tillåts skriva kod i.
 const express = require("express");
 const jsDOM = require("jsdom");
+const { Server } = require("socket.io");
+//const { parseCookie } = require("cookie")
 const cookieParser = require("cookie-parser");
 const globalObject = require("./servermodules/game-modul.js");
 const fs = require("fs");
 const path = require("path");
-const port = 3000;
+const {createServer} = require("node:http");
 
+
+
+const port = 3000;
 const app = express();
+const server = createServer(app);
+const socketIO = new Server(server);
 
 app.use("/public",express.static(path.join(__dirname,"static")));
 app.use(express.text());
@@ -32,6 +39,8 @@ app.get("/reset", (req, res) => {
     globalObject.playerOneColor = null;
     globalObject.playerTwoNick = null;
     globalObject.playerTwoColor = null;
+    globalObject.playerOneSocketId = null;
+    globalObject.playerTwoSocketId = null;
     res.redirect("/");
 })
 
@@ -72,20 +81,25 @@ app.post("/", (req, res) => {
 
         if(globalObject.playerOneNick === null) {
             globalObject.playerOneNick = nick_1;
+            //console.log("Player 1 nick set: ", globalObject.playerOneNick);
         } else {
             if (nick_1 === globalObject.playerOneNick) {
                 throw new Error("Nickname redan tagen!")
             }
-            globalObject.playerTwoNick = nick_1
+            globalObject.playerTwoNick = nick_1;
+            //console.log("Player 2 nick set: ", globalObject.playerTwoNick);
+
         }
 
         if(globalObject.playerOneColor === null) {
             globalObject.playerOneColor = color_1;
+            //console.log("Player 1 color set: ", globalObject.playerOneColor);
         } else {
             if(color_1 === globalObject.playerOneColor){
                 throw new Error("Färg redan tagen");
             }
             globalObject.playerTwoColor = color_1;
+            //console.log("Player 2 color set: ", globalObject.playerTwoColor);
         }
 
         res.cookie("nickName", nick_1, { maxAge: 2 * 60 * 60 * 1000, httpOnly:true });
@@ -104,4 +118,118 @@ app.post("/", (req, res) => {
 
 })
 
-const server = app.listen(port, () => console.log(`Listening on: http://localhost:${port}/`));
+
+socketIO.on("connection", (socket) => {
+
+    const cookies = globalObject.parseCookies(socket.request.headers.cookie);
+    function debug_log(msg) {
+        console.log(msg, JSON.stringify({
+            socketID: socket.id,
+            go_pl_1: {
+                nick: globalObject.playerOneNick,
+                color: globalObject.playerOneColor,
+                socket_id: globalObject.playerOneSocketId
+            },
+            go_pl_2: {
+                nick: globalObject.playerTwoNick,
+                color: globalObject.playerTwoColor,
+                socket_id: globalObject.playerTwoSocketId,
+            },
+            cookies: cookies,
+        }, null, 4))
+    }
+
+    if(cookies && cookies["nickName"] && cookies["color"]) {
+
+        //debug_log("before: ");
+        if(globalObject.playerOneSocketId && globalObject.playerTwoSocketId)
+        {
+            socket.disconnect();
+            console.log("Redan två spelare anslutna!");
+            return;
+        }
+
+        if(cookies["nickName"] === globalObject.playerOneNick) {
+            //console.log("player 1 socket set")
+            globalObject.playerOneSocketId = socket.id;
+        }
+
+        if(cookies["nickName"] === globalObject.playerTwoNick) {
+            //console.log("player 2 socket set")
+            globalObject.playerTwoSocketId = socket.id;
+        }
+
+        if(globalObject.playerOneSocketId && globalObject.playerTwoSocketId) {
+            //console.log("NEW_GAME")
+            globalObject.resetGameArea();
+            globalObject.currentPlayer = 1;
+            socketIO.to(globalObject.playerOneSocketId).emit("newGame", { opponentNick: globalObject.playerTwoNick, opponentColor: globalObject.playerTwoColor, myColor: globalObject.playerOneColor });
+            socketIO.to(globalObject.playerTwoSocketId).emit("newGame", { opponentNick: globalObject.playerOneNick, opponentColor: globalObject.playerOneColor, myColor: globalObject.playerTwoColor });
+            socketIO.to(globalObject.playerOneSocketId).emit("yourMove", null);
+            globalObject.timerId = setInterval(timeout, 5000);
+        }
+
+        //debug_log("after: ");
+
+    } else {
+        socket.disconnect();
+        console.log("Kakorna saknas!");
+        return;
+    }
+
+    socket.on("newMove", (data) => {
+        globalObject.gameArea[data.cellId] = globalObject.currentPlayer;
+
+        if(globalObject.currentPlayer === 1) {
+            globalObject.currentPlayer = 2;
+            socket.to(globalObject.playerTwoSocketId).emit("yourMove", data);
+        }else {
+            globalObject.currentPlayer = 1;
+            socket.to(globalObject.playerOneSocketId).emit("yourMove", data);
+        }
+
+        const gameResult = globalObject.checkForWinner();
+        switch (gameResult) {
+            case 1:
+                // spelare ett vann
+                socketIO.to(globalObject.playerOneSocketId).emit("gameover", "Grattis du vann!");
+                socketIO.to(globalObject.playerTwoSocketId).emit("gameover", "Du förlorade! Spelare 2 vann.");
+                break;
+            case 2:
+                // spelare två vann
+                socketIO.to(globalObject.playerTwoSocketId).emit("gameover", "Grattis du vann!");
+                socketIO.to(globalObject.playerOneSocketId).emit("gameover", "Du förlorade! Spelare 2 vann.");
+                break;
+            case 3:
+                // oavgjort
+                socketIO.to(globalObject.playerOneSocketId).emit("gameover", "Det blev oavgjort!");
+                socketIO.to(globalObject.playerTwoSocketId).emit("gameover", "Det blev oavgjort!");
+                break;
+        }
+
+        clearInterval(globalObject.timerId);
+        if(gameResult > 0) {
+            globalObject.playerOneSocketId = null;
+            globalObject.playerTwoSocketId = null;
+        } else {
+            globalObject.timerId = setInterval(timeout, 5000);
+        }
+
+        //debug_log("NEW_MOVE: ")
+    })
+
+})
+
+server.listen(port, () => console.log(`listening on http://localhost:${port}`));
+
+function timeout() {
+    if(globalObject.currentPlayer === 1) {
+        socketIO.to(globalObject.playerOneSocketId).emit("timeout");
+        globalObject.currentPlayer = 2;
+        socketIO.to(globalObject.playerTwoSocketId).emit("yourMove", null);
+    } else if( globalObject.currentPlayer === 2) {
+        socketIO.to(globalObject.playerTwoSocketId).emit("timeout");
+        globalObject.currentPlayer = 1;
+        socketIO.to(globalObject.playerOneSocketId).emit("yourMove", null);
+    }
+}

@@ -14,8 +14,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "cookie": "^1.1.1",
     "cookie-parser": "^1.4.7",
     "express": "^5.2.1",
-    "jsdom": "^29.1.1"
+    "jsdom": "^29.1.1",
+    "socket.io": "^4.8.3"
   }
 }
