@@ -1,0 +1,9 @@
+{
+  "layout": "magazine", 
+  "emoji": "🎮", 
+  "title": "Tic-Tac-Toe Network Edition", 
+  "tagline": "Real-time multiplayer Tic-Tac-Toe over the network — from different tabs or different computers entirely.",
+  "tags": [
+    "Node.js", "Socket.io", "Websockets", "Real-time"
+  ],
+}
