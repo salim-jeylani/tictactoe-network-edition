@@ -6,9 +6,10 @@
   "tags": [
     "Node.js", "Socket.io", "Websockets", "Real-time"
   ],
+  "demo": "https://www.w3schools.com/html/mov_bbb.mp4",
   "screenshots": [
-    { "src":"docs/ttt_1.jpg", "label":"example" },
-    { "src":"docs/ttt_2.jpg", "label":"example" },
-    { "src":"docs/ttt_3.jpg", "label":"example" }
+    { "src":"./docs/ttt_1.jpg", "label":"example" },
+    { "src":"./docs/ttt_2.jpg", "label":"example" },
+    { "src":"./docs/ttt_3.jpg", "label":"example" }
   ]
 }
