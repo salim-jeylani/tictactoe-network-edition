@@ -5,5 +5,10 @@
   "tagline": "Real-time multiplayer Tic-Tac-Toe over the network — from different tabs or different computers entirely.",
   "tags": [
     "Node.js", "Socket.io", "Websockets", "Real-time"
+  ],
+  "screenshots": [
+    { "src":"docs/ttt_1.jpg", "label":"example" },
+    { "src":"docs/ttt_2.jpg", "label":"example" },
+    { "src":"docs/ttt_3.jpg", "label":"example" }
   ]
 }
