@@ -11,5 +11,18 @@
     { "src":"./docs/ttt_1.jpg", "label":"example" },
     { "src":"./docs/ttt_2.jpg", "label":"example" },
     { "src":"./docs/ttt_3.jpg", "label":"example" }
+  ],
+  "features": [
+    { "title": "Play with anyone", "desc": "Two players connect from different browsers — no account needed" },
+    { "title": "Timed turns", "desc": "You have 5 seconds to make your move or your turn is skipped" },
+    { "title": "Pick your look", "desc": "Choose a nickname and color before each game" },
+    { "title": "Instant rematch", "desc": "Jump straight into another round without refreshing" }
+  ],
+  "context": "Built to explore real-time communication between users — the core challenge was keeping two separate browsers perfectly in sync without any delay.",
+  "tech": [
+    { "name": "Node.js", "role": "Server runtime" },
+    { "name": "Express", "role": "HTTP routing" },
+    { "name": "Socket.io", "role": "WebSockets" },
+    { "name": "jsdom", "role": "Server-side DOM" }
   ]
 }
