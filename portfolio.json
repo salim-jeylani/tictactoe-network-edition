@@ -2,9 +2,9 @@
   "layout": "magazine", 
   "emoji": "🎮", 
   "title": "Tic-Tac-Toe Network Edition", 
-  "tagline": "Real-time multiplayer Tic-Tac-Toe over the network — from different tabs or different computers entirely.",
+  "tagline": "Real-time multiplayer Tic-Tac-Toe over the network — from different web browsers or different computers entirely.",
   "tags": [
-    "Node.js", "Socket.io", "Websockets", "Real-time"
+    "Node.js", "Socket.io", "Websockets", "Real-time", "online-game"
   ],
   "demo": "https://www.w3schools.com/html/mov_bbb.mp4",
   "screenshots": [
