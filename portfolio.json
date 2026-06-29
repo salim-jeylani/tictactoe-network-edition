@@ -1,28 +1,129 @@
 {
-  "layout": "magazine", 
-  "emoji": "🎮", 
-  "title": "Tic-Tac-Toe Network Edition", 
-  "tagline": "Real-time multiplayer Tic-Tac-Toe over the network — from different web browsers or different computers entirely.",
+  "layout": "magazine",
+  "emoji": "🎮",
+  "title": "Tic-Tac-Toe Network Edition v2",
+  "tagline": "A real-time multiplayer Tic-Tac-Toe game powered by WebSockets with synchronized gameplay, turn management, and automatic timeout handling.",
   "tags": [
-    "Node.js", "Socket.io", "Websockets", "Real-time", "online-game"
+    "Node.js",
+    "Express.js",
+    "Socket.IO",
+    "WebSockets",
+    "Real-Time"
   ],
   "demo": "https://www.w3schools.com/html/mov_bbb.mp4",
   "screenshots": [
-    { "src":"./docs/ttt_1.jpg", "label":"example" },
-    { "src":"./docs/ttt_2.jpg", "label":"example" },
-    { "src":"./docs/ttt_3.jpg", "label":"example" }
+    {
+      "src": "./docs/screenshot_1.jpg",
+      "label": "Multiplayer Match"
+    },
+    {
+      "src": "./docs/screenshot_2.jpg",
+      "label": "Live Gameplay"
+    },
+    {
+      "src": "./docs/screenshot_3.jpg",
+      "label": "Game Over"
+    }
   ],
   "features": [
-    { "title": "Play with anyone", "desc": "Two players connect from different browsers — no account needed" },
-    { "title": "Timed turns", "desc": "You have 5 seconds to make your move or your turn is skipped" },
-    { "title": "Pick your look", "desc": "Choose a nickname and color before each game" },
-    { "title": "Instant rematch", "desc": "Jump straight into another round without refreshing" }
+    {
+      "title": "Real-Time Multiplayer",
+      "desc": "Synchronizes gameplay between two connected players using WebSockets, allowing moves to appear instantly on both clients."
+    },
+    {
+      "title": "Server-Authoritative Game Logic",
+      "desc": "The server validates every move, controls turn order, determines winners, and ensures both players remain synchronized."
+    },
+    {
+      "title": "Automatic Turn Timer",
+      "desc": "Implements a countdown timer that automatically transfers the turn if a player does not make a move within the allotted time."
+    },
+    {
+      "title": "Connection & Match Management",
+      "desc": "Handles player connections, prevents additional users from joining active matches, supports rematches, and resets sessions when games end."
+    }
   ],
-  "context": "Built to explore real-time communication between users — the core challenge was keeping two separate browsers perfectly in sync without any delay.",
+  "context": "Building upon the first version, this project transforms the application into a fully interactive real-time multiplayer experience. Socket.IO is used to establish persistent WebSocket connections, enabling bidirectional communication between the server and connected clients. The server acts as the single source of truth, managing player connections, synchronizing game state, enforcing game rules, handling timeouts, and coordinating rematches.",
   "tech": [
-    { "name": "Node.js", "role": "Server runtime" },
-    { "name": "Express", "role": "HTTP routing" },
-    { "name": "Socket.io", "role": "WebSockets" },
-    { "name": "jsdom", "role": "Server-side DOM" }
+    {
+      "name": "Node.js",
+      "role": "Runs the backend server and game logic."
+    },
+    {
+      "name": "Express.js",
+      "role": "Serves the application and manages HTTP endpoints."
+    },
+    {
+      "name": "Socket.IO",
+      "role": "Provides bidirectional WebSocket communication for real-time multiplayer gameplay."
+    },
+    {
+      "name": "JavaScript Timers",
+      "role": "Implements automatic turn timeouts and manages timed game events."
+    }
+  ]
+}{
+  "layout": "magazine",
+  "emoji": "🎮",
+  "title": "Tic-Tac-Toe Network Edition v2",
+  "tagline": "A real-time multiplayer Tic-Tac-Toe game powered by WebSockets with synchronized gameplay, turn management, and automatic timeout handling.",
+  "tags": [
+    "Node.js",
+    "Express.js",
+    "Socket.IO",
+    "WebSockets",
+    "Real-Time"
+  ],
+  "demo": "https://www.w3schools.com/html/mov_bbb.mp4",
+  "screenshots": [
+    {
+      "src": "./docs/screenshot_1.jpg",
+      "label": "Multiplayer Match"
+    },
+    {
+      "src": "./docs/screenshot_2.jpg",
+      "label": "Live Gameplay"
+    },
+    {
+      "src": "./docs/screenshot_3.jpg",
+      "label": "Game Over"
+    }
+  ],
+  "features": [
+    {
+      "title": "Real-Time Multiplayer",
+      "desc": "Synchronizes gameplay between two connected players using WebSockets, allowing moves to appear instantly on both clients."
+    },
+    {
+      "title": "Server-Authoritative Game Logic",
+      "desc": "The server validates every move, controls turn order, determines winners, and ensures both players remain synchronized."
+    },
+    {
+      "title": "Automatic Turn Timer",
+      "desc": "Implements a countdown timer that automatically transfers the turn if a player does not make a move within the allotted time."
+    },
+    {
+      "title": "Connection & Match Management",
+      "desc": "Handles player connections, prevents additional users from joining active matches, supports rematches, and resets sessions when games end."
+    }
+  ],
+  "context": "Building upon the first version, this project transforms the application into a fully interactive real-time multiplayer experience. Socket.IO is used to establish persistent WebSocket connections, enabling bidirectional communication between the server and connected clients. The server acts as the single source of truth, managing player connections, synchronizing game state, enforcing game rules, handling timeouts, and coordinating rematches.",
+  "tech": [
+    {
+      "name": "Node.js",
+      "role": "Runs the backend server and game logic."
+    },
+    {
+      "name": "Express.js",
+      "role": "Serves the application and manages HTTP endpoints."
+    },
+    {
+      "name": "Socket.IO",
+      "role": "Provides bidirectional WebSocket communication for real-time multiplayer gameplay."
+    },
+    {
+      "name": "JavaScript Timers",
+      "role": "Implements automatic turn timeouts and manages timed game events."
+    }
   ]
 }
