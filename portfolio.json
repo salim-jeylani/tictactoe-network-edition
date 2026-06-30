@@ -13,16 +13,40 @@
   "demo": "https://www.w3schools.com/html/mov_bbb.mp4",
   "screenshots": [
     {
-      "src": "./docs/screenshot_1.jpg",
-      "label": "Multiplayer Match"
+    "src": "./docs/player-one-connected.jpg",
+    "label": "Player One Connected"
     },
     {
-      "src": "./docs/screenshot_2.jpg",
-      "label": "Live Gameplay"
+      "src": "./docs/player-two-connected.jpg",
+      "label": "Player Two Connected"
     },
     {
-      "src": "./docs/screenshot_3.jpg",
+      "src": "./docs/new-game.jpg",
+      "label": "New Match Started"
+    },
+    {
+      "src": "./docs/player-one-turn.jpg",
+      "label": "Player One's Turn"
+    },
+    {
+      "src": "./docs/player-two-turn.jpg",
+      "label": "Player Two's Turn"
+    },
+    {
+      "src": "./docs/live-sync.jpg",
+      "label": "Real-Time Synchronization"
+    },
+    {
+      "src": "./docs/timeout.jpg",
+      "label": "Turn Timeout"
+    },
+    {
+      "src": "./docs/game-over.jpg",
       "label": "Game Over"
+    },
+    {
+      "src": "./docs/play-again.jpg",
+      "label": "Play Again"
     }
   ],
   "features": [
