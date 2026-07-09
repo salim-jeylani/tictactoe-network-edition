@@ -31,7 +31,7 @@
     {
       "src": "./docs/game_win.png",
       "label": "Server announces the winner to both players."
-    },
+    }
   ],
   "features": [
     {
