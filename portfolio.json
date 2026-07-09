@@ -13,41 +13,25 @@
   "demo": "https://www.w3schools.com/html/mov_bbb.mp4",
   "screenshots": [
     {
-    "src": "./docs/player-one-connected.jpg",
-    "label": "Player One Connected"
+      "src": "./docs/start.png",
+      "label": "Initial page load."
     },
     {
-      "src": "./docs/player-two-connected.jpg",
-      "label": "Player Two Connected"
+      "src": "./docs/player_one_connected.png",
+      "label": "First client connected to the server."
     },
     {
-      "src": "./docs/new-game.jpg",
-      "label": "New Match Started"
+      "src": "./docs/game_start.png",
+      "label": "WebSocket event starts the match."
     },
     {
-      "src": "./docs/player-one-turn.jpg",
-      "label": "Player One's Turn"
+    "src": "./docs/game_play.png",
+    "label": "Two browser windows showing synchronized gameplay."
     },
     {
-      "src": "./docs/player-two-turn.jpg",
-      "label": "Player Two's Turn"
+      "src": "./docs/game_win.png",
+      "label": "Server announces the winner to both players."
     },
-    {
-      "src": "./docs/live-sync.jpg",
-      "label": "Real-Time Synchronization"
-    },
-    {
-      "src": "./docs/timeout.jpg",
-      "label": "Turn Timeout"
-    },
-    {
-      "src": "./docs/game-over.jpg",
-      "label": "Game Over"
-    },
-    {
-      "src": "./docs/play-again.jpg",
-      "label": "Play Again"
-    }
   ],
   "features": [
     {
